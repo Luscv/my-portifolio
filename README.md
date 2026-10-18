@@ -28,6 +28,9 @@ For a cloud workspace whose home directory is read-only, set `npm_config_cache=/
 ```text
 config/deployment.mjs           GitHub Pages site/base resolution
 src/content/projects/*.md      Project content and metadata
+src/content/fieldnotes/*.md    Photos, films, portrait, and their captions
+src/assets/fieldnotes/         Original photos and video posters
+public/media/                  Video and WebVTT files
 src/content.config.ts          Content validation schema
 src/data/site.ts               Name, GitHub, LinkedIn, contact email
 src/components/                Header, footer, visual studies, embed, work listing
@@ -45,9 +48,17 @@ scripts/check-build.mjs        Generated-site validation
 
 ## Edit personal details
 
-Edit `src/data/site.ts`. GitHub points to the verified `Luscv` profile. **LinkedIn and email are intentionally `null`** because no values were supplied. Provide real values to activate their links. The header labels the unavailable LinkedIn destination, and the footer labels the missing contact email. No fake `#` social links are used.
+Edit `src/data/site.ts` for personal links and metadata. GitHub, LinkedIn, and contact email are already set to Lucas’s supplied details. Keep the existing manual edits unless an update is explicitly intended.
 
-Professional biography text is in `src/pages/index.astro`. Only the supplied background and current postgraduate studies at PUC Minas are represented. There are no invented employers, dates, qualifications, model scores, or impact claims.
+The professional biography is in `src/pages/index.astro` and uses Lucas’s own Data Science-focused wording. Project updates and media uploads do not require editing it.
+
+## Publish photos, films, and captions
+
+The homepage includes **Fieldnotes**, an editorial media section, plus an optional profile portrait in About. Add a Markdown entry in `src/content/fieldnotes/` and upload its image to `src/assets/fieldnotes/` or its video to `public/media/`. Captions are the Markdown body; no UI component changes are required. Draft entries are excluded from the page, and no personal media is invented or published as a placeholder.
+
+Follow the step-by-step Portuguese guide in **[docs/midia.md](docs/midia.md)** to publish entirely through GitHub’s web interface. Copyable templates are in `docs/fieldnote-photo.md` and `docs/fieldnote-video.md`. Use `src/content/fieldnotes/portrait.md` for the portrait without changing the biography.
+
+Images have responsive sources, intrinsic dimensions, and lazy loading. Videos use native controls, `preload="none"`, optional posters, direct-file fallbacks, and WebVTT captions for meaningful audio; there is no autoplay or media JavaScript. Files are validated during the build. A single published portrait is allowed; journal entries are ordered by `order`, then filename.
 
 ## Add or edit a project
 
@@ -76,10 +87,14 @@ Optional fields:
 | `shortTitle` | Shorter title in the homepage listing |
 | `featured` | Defaults to `true`; `false` excludes only the homepage listing |
 | `year` | A verified year or period, as a quoted string |
-| `visual` | `classification`, `forecast`, `tableau`, or `none` (default) |
+| `visual` | `classification`, `forecast`, `tableau`, `relational`, or `none` (default) |
 | `cover`, `coverAlt`, `coverCaption` | Local cover image, meaningful alt text, and optional caption |
 | `links` | List of `{ label, url }` objects using verified HTTPS URLs |
 | `pendingLinks` | Names of resources not yet provided; rendered as text, never broken links |
+| `downloads` | List of `{ label, file }` objects for actual files under `public/projects/`; use `/projects/...` paths |
+| `figures` | Array of `{ image, alt, title, caption }` items; local images use paths relative to the content file |
+| `galleryTitle`, `galleryNote` | Heading and source/quality note for the figure gallery |
+| `tableau` | Set `true` to show the Tableau publication status before a public URL is available |
 | `tableauUrl`, `tableauTitle` | Real Tableau Public view URL and accessible title |
 
 Allowed statuses are `Documented project`, `Work in progress`, and `Editable template`. Markdown `##` headings automatically generate the case-study table of contents. They should cover context, data, methods, validation, results, and limitations.
@@ -191,4 +206,4 @@ The diagrams are original SVG method illustrations, explicitly labeled as illust
 
 `npm run validate` checks deployment settings, builds every page, checks local links and fragments, verifies generated assets and image dimensions, and checks metadata and the sitemap. Before publishing changes, also inspect mobile/desktop rendering and keyboard navigation in a browser. External sites and Tableau availability require their own checks; the static build cannot establish their uptime.
 
-Still to supply: a LinkedIn URL, contact email, actual project repositories/reports, documented experiment details and results, and a real Tableau Public dashboard. The portfolio is intentionally publishable with clearly labeled placeholders; no missing information is silently invented.
+Still to supply: personal photos and films, the Telco source repository/Quarto report and measured results, and the published Tableau Public view. The PBH case study includes the original TWB and its three embedded thumbnails; the Excel data and a packaged TWBX were not among the supplied files. Its source documentation identifies a prepared dataset derived from PBH data; reference-report findings are attributed separately from the workbook’s verified structure. Supporting third-party PDFs are not presented as Lucas’s own authored report.

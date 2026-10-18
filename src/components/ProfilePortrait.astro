@@ -1,0 +1,13 @@
+---
+import { Image } from 'astro:assets';
+import { render } from 'astro:content';
+import { getFieldnotes } from '../lib/fieldnotes';
+import Asterisk from './Asterisk.astro';
+const { portrait } = await getFieldnotes();
+const rendered = portrait ? await render(portrait) : null;
+const Content = rendered?.Content;
+---
+{portrait?.data.image ? <figure class="profile-portrait">
+  <Image src={portrait.data.image} alt={portrait.data.alt || ''} widths={[240, 480]} sizes="(max-width: 700px) 120px, 240px" loading="lazy" />
+  {Content && portrait.body?.trim() && <figcaption><Content /></figcaption>}
+</figure> : <p class="about-monogram" aria-hidden="true">Lb<span><Asterisk /></span></p>}

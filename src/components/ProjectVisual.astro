@@ -1,15 +1,16 @@
 ---
-interface Props { kind: 'classification' | 'forecast' | 'tableau' | 'none'; large?: boolean; }
+interface Props { kind: 'classification' | 'forecast' | 'tableau' | 'relational' | 'none'; large?: boolean; }
 const { kind, large = false } = Astro.props;
 const labels = {
   classification: 'A schematic decision tree, representing a classification workflow',
   forecast: 'A schematic time series with a held-out period, representing temporal validation',
   tableau: 'An empty plotting frame for a future Tableau visualization',
+  relational: 'Report records linked by their identifier to people, vehicles, streets, and coordinates',
   none: 'An empty plotting frame; project preview not yet provided',
 };
 ---
 <figure class:list={['project-visual', `visual-${kind}`, { 'visual-large': large }]}>
-  <div class="visual-label" aria-hidden="true"><span>{kind === 'classification' ? '01 / Classification' : kind === 'forecast' ? '02 / Time series' : '03 / Visualization'}</span><span>LB</span></div>
+  <div class="visual-label" aria-hidden="true"><span>{kind === 'classification' ? '01 / Classification' : kind === 'forecast' ? '02 / Time series' : kind === 'relational' ? '03 / Relational model' : '03 / Visualization'}</span><span>LB</span></div>
   <svg viewBox="0 0 440 240" fill="none" role="img" aria-label={labels[kind]}>
     {kind === 'classification' ? <>
       <path d="M220 58v32H112v40m108-40h108v40M112 154v24H59v28m53-28h53v28m163-52v24h-53v28m53-28h53v28" stroke="currentColor" stroke-width="1" />
@@ -28,6 +29,14 @@ const labels = {
       <path d="m28 173 17-9 17 6 17-37 17 14 17-22 17 15 17-48 17 26 17-7 17 16 17-40 17 10 17-24 17 18 18-28" stroke="currentColor" stroke-width="1.5" />
       <path d="m284 72 20 8 20-22 20 10 20-28 20 12 30-17" stroke="var(--color-copper)" stroke-width="1.5" stroke-dasharray="4 4" />
       <text x="28" y="226" fill="currentColor">historical window</text><text x="295" y="226" fill="var(--color-accent)">holdout</text>
+    </> : kind === 'relational' ? <>
+      <path d="M220 100V55H92m128 0h128M220 140v48H92m128 0h128" stroke="var(--color-copper)" stroke-width="1.2" />
+      <rect x="162" y="100" width="116" height="40" fill="var(--color-ink)" />
+      <text x="220" y="125" fill="var(--color-paper)" text-anchor="middle">reports</text>
+      {[[92, 55, 'people'], [348, 55, 'vehicles'], [92, 188, 'streets'], [348, 188, 'coordinates']].map(([x, y, label]) => <>
+        <rect x={Number(x) - 54} y={Number(y) - 17} width="108" height="34" fill="var(--color-surface)" stroke="var(--color-border)" />
+        <text x={x} y={Number(y) + 5} text-anchor="middle" fill="currentColor">{label}</text>
+      </>)}
     </> : <>
       <path d="M55 28v170h334M55 70h334M55 113h334M55 156h334M139 28v170M222 28v170M306 28v170M389 28v170" stroke="currentColor" stroke-opacity=".16" />
       <rect x="115" y="84" width="214" height="51" fill="var(--color-paper)" />
@@ -36,5 +45,5 @@ const labels = {
       <text x="55" y="226" fill="var(--color-muted)">No data published</text>
     </>}
   </svg>
-  <figcaption>{kind === 'classification' || kind === 'forecast' ? 'Method illustration · not an experimental result' : 'Placeholder · visualization not yet provided'}</figcaption>
+  <figcaption>{kind === 'relational' ? 'Model diagram · based on workbook relationships' : kind === 'classification' || kind === 'forecast' ? 'Method illustration · not an experimental result' : 'Placeholder · visualization not yet provided'}</figcaption>
 </figure>

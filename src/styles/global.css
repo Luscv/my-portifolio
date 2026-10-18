@@ -136,6 +136,30 @@ strong { font-weight: 550; }
 .about-details dt { font: 400 9px/1.7 var(--font-mono); text-transform: uppercase; color: var(--color-muted); margin-bottom: 12px; }
 .about-details dd { margin: 0; font-size: 11px; line-height: 1.8; }
 .about-details dd span { color: var(--color-muted); font-size: 10px; }
+.profile-portrait { max-width: 240px; margin-top: var(--space-6); }
+.profile-portrait img { width: 100%; height: auto; }
+.profile-portrait figcaption { margin-top: 12px; color: var(--color-muted); font-size: 11px; }
+
+/* Fieldnotes: an editorial photo and film journal, authored in Markdown. */
+.fieldnotes-section { border-top: 1px solid var(--color-border); padding-block: var(--space-10) var(--space-12); }
+.fieldnotes-star { color: var(--color-accent); font-size: 34px; font-style: italic; align-self: flex-start; margin-top: -6px; }
+.fieldnotes-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--space-8) var(--space-3); align-items: start; }
+.fieldnote { grid-column: 1 / 6; min-width: 0; }
+.fieldnote:nth-child(even) { grid-column: 7 / -1; margin-top: var(--space-10); }
+.fieldnote-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--color-muted); font-size: 10px; margin-bottom: 12px; }
+.fieldnote > img { width: 100%; height: auto; }
+.fieldnote video { display: block; width: 100%; height: auto; max-height: 720px; background: var(--color-surface); object-fit: contain; }
+.fieldnote figcaption { margin-top: var(--space-3); max-width: 52ch; }
+.fieldnote h3 { font-size: clamp(27px, 2.6vw, 34px); line-height: 1.15; letter-spacing: -.02em; }
+.fieldnote-caption { color: #4e4f49; font-size: 13px; line-height: 1.85; margin-top: 12px; overflow-wrap: anywhere; }
+.fieldnote-caption p + p { margin-top: 8px; }
+.fieldnote-caption a { color: var(--color-accent); }
+.fieldnote-caption .katex-display { overflow-x: auto; overflow-y: hidden; }
+.video-fallback { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: var(--color-muted); font-size: 10px; text-decoration: none; }
+.video-fallback:hover { color: var(--color-accent); text-decoration: underline; }
+.fieldnotes-empty { display: flex; align-items: start; justify-content: space-between; gap: var(--space-4); padding-block: var(--space-4); border-block: 1px solid var(--color-border); }
+.fieldnotes-empty-title { font: 400 italic clamp(28px, 3vw, 36px)/1.2 var(--font-display); color: var(--color-accent); }
+.fieldnotes-empty > p:last-child { max-width: 45ch; font-size: 13px; line-height: 1.8; color: var(--color-muted); }
 
 /* Footer */
 .site-footer { border-top: 1px solid var(--color-border); }
@@ -206,6 +230,14 @@ strong { font-weight: 550; }
 .pending-resources > p { font: 400 10px/1.7 var(--font-mono); text-transform: uppercase; }
 .pending-resources li { margin-top: 8px; }
 .pending-resources li::before { content: '— '; color: var(--color-accent); }
+.workbook-gallery { margin-top: var(--space-8); padding-top: var(--space-4); border-top: 1px solid var(--color-border); }
+.workbook-gallery h2 { font-size: 34px; line-height: 1.2; margin-top: 16px; }
+.workbook-figures { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 24px; }
+.workbook-figures img { max-width: 100%; width: 192px; height: auto; margin-inline: auto; }
+.workbook-figures figcaption { margin-top: 16px; }
+.workbook-figures h3 { font-size: 23px; line-height: 1.2; }
+.workbook-figures p { color: var(--color-muted); font-size: 11px; line-height: 1.8; margin-top: 8px; }
+.gallery-note { margin-top: 24px; color: var(--color-muted); font: 400 10px/1.8 var(--font-mono); }
 .next-project { border-top: 1px solid var(--color-border); padding-block: var(--space-5) var(--space-10); }
 .next-project > a { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); margin-top: 24px; font: 400 clamp(30px, 4vw, 48px)/1.2 var(--font-display); letter-spacing: -.02em; text-decoration: none; }
 .next-project .arrow { width: 32px; height: 32px; }
@@ -242,8 +274,8 @@ tableau-view { display: block; margin-top: 16px; }
   :root { --gutter: 24px; }
   .site-header { min-height: 124px; display: block; padding-block: 16px 12px; }
   .wordmark { font-size: 27px; }
-  .site-header nav { justify-content: flex-start; gap: 24px; font-size: 11px; }
-  .nav-divider { margin-inline: auto 0; }
+  .site-header nav { justify-content: space-between; gap: 16px; font-size: 11px; }
+  .nav-divider { display: none; }
   .hero { padding-top: 32px; }
   .hero-topline .eyebrow { font-size: 9px; letter-spacing: .04em; }
   .hero-note { display: none; }
@@ -276,6 +308,16 @@ tableau-view { display: block; margin-top: 16px; }
   .about-label { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; }
   .about-monogram { font-size: 44px; margin-top: 0; }
   .about-monogram > span { font-size: 15px; margin-left: 6px; }
+  .profile-portrait { flex: 0 0 120px; margin-top: 0; }
+  .profile-portrait figcaption { font-size: 10px; }
+  .fieldnotes-section { padding-block: 56px 64px; }
+  .fieldnotes-grid { display: block; }
+  .fieldnote + .fieldnote, .fieldnote:nth-child(even) { margin-top: 48px; }
+  .fieldnotes-empty { display: block; }
+  .fieldnotes-empty > p:last-child { margin-top: 16px; }
+  .workbook-figures { grid-template-columns: 1fr; gap: 32px; }
+  .workbook-figures figure { max-width: 320px; }
+  .workbook-figures img { margin-inline: 0; }
   .about-content h2 { font-size: clamp(31px, 6.5vw, 44px); }
   .about-details { gap: 24px; grid-template-columns: 1fr 1fr; margin-top: 32px; }
   .about-details > div:last-child { grid-column: 1 / -1; }
@@ -308,7 +350,7 @@ tableau-view { display: block; margin-top: 16px; }
 }
 @media (max-width: 360px) {
   :root { --gutter: 20px; }
-  .site-header nav { gap: 16px; }
+  .site-header nav { gap: 10px; }
   .hero h1 { font-size: 43px; }
   .project-copy h3 { font-size: 29px; }
   .project-row { grid-template-columns: 18px minmax(0, 1fr); gap: 0 10px; }

@@ -54,6 +54,11 @@ for (const [file, html] of htmlByPath) {
   for (const match of html.matchAll(/<img\b[^>]*>/g)) {
     if (!/\balt="[^"]*"/.test(match[0]) || !/\bwidth="\d+"/.test(match[0]) || !/\bheight="\d+"/.test(match[0])) failures.push(`${label}: image missing dimensions or alt attribute`);
   }
+  for (const match of html.matchAll(/<video\b[^>]*>/g)) {
+    const tag = match[0];
+    if (!/\bcontrols(?:\s|>|=)/.test(tag) || /\bautoplay(?:\s|>|=)/.test(tag)) failures.push(`${label}: videos must have controls and must not autoplay`);
+    if (!/\bwidth="\d+"/.test(tag) || !/\bheight="\d+"/.test(tag) || !/\baria-label(?:ledby)?="[^"]+"/.test(tag)) failures.push(`${label}: video missing dimensions or accessible name`);
+  }
 }
 for (const file of built.filter(file => extname(file) === '.css')) {
   const css = await readFile(file, 'utf8');

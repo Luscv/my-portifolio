@@ -1,0 +1,33 @@
+---
+import { Image, getImage } from 'astro:assets';
+import { render } from 'astro:content';
+import 'katex/dist/katex.min.css';
+import { getFieldnotes } from '../lib/fieldnotes';
+import { withBase } from '../lib/paths';
+const { entries } = await getFieldnotes();
+const notes = await Promise.all(entries.map(async entry => ({
+  entry,
+  ...await render(entry),
+  poster: entry.data.poster ? await getImage({ src: entry.data.poster, width: Math.min(1200, entry.data.poster.width), format: 'webp' }) : null,
+})));
+---
+<section class="fieldnotes-section container" id="fieldnotes" aria-labelledby="fieldnotes-title">
+  <div class="section-heading">
+    <div><p class="eyebrow">03 / The process, in fragments</p><h2 id="fieldnotes-title">Fieldnotes<span class="fieldnotes-star" aria-hidden="true">*</span></h2></div>
+    <p>Photographs, moving images,<br class="desktop-break" /> and ideas worked through.</p>
+  </div>
+  {notes.length ? <div class="fieldnotes-grid">
+    {notes.map(({ entry, Content, poster }, index) => <figure class:list={['fieldnote', `fieldnote-${entry.data.kind}`]} id={`fieldnote-${entry.id}`}>
+      <div class="fieldnote-meta mono"><span>{String(index + 1).padStart(2, '0')} / {entry.data.kind === 'image' ? 'Photograph' : entry.data.silent ? 'Silent film' : 'Film'}</span>{entry.data.date && <time datetime={entry.data.date}>{entry.data.date}</time>}</div>
+      {entry.data.kind === 'image' && entry.data.image ? <Image src={entry.data.image} alt={entry.data.alt || ''} widths={[...new Set([480, 800, 1200].map(width => Math.min(width, entry.data.image!.width)))]} sizes="(max-width: 700px) calc(100vw - 48px), 50vw" loading="lazy" /> : entry.data.video && <>
+        <video controls playsinline preload="none" muted={entry.data.silent} width={entry.data.width} height={entry.data.height} poster={poster?.src} aria-labelledby={`note-title-${entry.id}`}>
+          <source src={withBase(entry.data.video)} type={entry.data.video.endsWith('.webm') ? 'video/webm' : 'video/mp4'} />
+          {entry.data.captions && <track kind="captions" src={withBase(entry.data.captions)} srclang={entry.data.captionsLanguage} label={entry.data.captionsLabel} default />}
+          Your browser does not support embedded video. Use the direct link below.
+        </video>
+        <a class="video-fallback mono" href={withBase(entry.data.video)}>Open video file <span aria-hidden="true">↗</span></a>
+      </>}
+      <figcaption><h3 id={`note-title-${entry.id}`}>{entry.data.title}</h3>{entry.body?.trim() && <div class="fieldnote-caption"><Content /></div>}</figcaption>
+    </figure>)}
+  </div> : <div class="fieldnotes-empty"><p class="fieldnotes-empty-title">A notebook, left open.</p><p>Small records of a practice in data science.<br />The first photographs and films are still to come.</p></div>}
+</section>

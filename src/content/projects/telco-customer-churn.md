@@ -1,26 +1,31 @@
 ---
 title: Telco Customer Churn
-abstract: Exploring a statistical classification problem through exploratory analysis, logistic regression, and decision trees. Built in R and documented with Quarto.
+abstract: Predictive analysis of the Telco Customer Churn dataset from Kaggle, using exploratory analysis, logistic regression, and decision trees in R and Quarto.
 discipline: Statistical modeling
 order: 1
 status: Documented project
-statusDetail: The methods, implementation language, and documentation format are confirmed. Dataset provenance, experiment details, and measured results have not been supplied for this portfolio.
+statusDetail: The Kaggle data source, predictive objective, and modeling approach are documented. Experiment details and measured model performance will be added with their supporting analysis.
 tags: [R, Quarto, Logistic regression, Decision trees]
 visual: classification
+links:
+  - label: Telco Customer Churn dataset on Kaggle
+    url: https://www.kaggle.com/datasets/blastchar/telco-customer-churn
 pendingLinks: [GitHub repository, Quarto report]
 ---
 
 ## Context & problem
 
-Customer churn is a statistical classification problem: the task is to distinguish customers who churn from those who do not. This project approaches that problem through exploratory analysis and two modeling families, logistic regression and decision trees.
+The objective is to develop a **predictive analysis of customer churn** using the Telco Customer Churn dataset available on Kaggle. This is a statistical classification problem: distinguishing customers who churn from those who do not.
+
+The project combines exploratory analysis with two modeling families, logistic regression and decision trees, to investigate that predictive task.
 
 The work is implemented in **R** and documented with **Quarto**. This case study records the confirmed scope; it does not claim a particular model outperformed another or attach an unsupported business outcome to the analysis.
 
 ## Data & approach
 
-Exploratory analysis is part of the project. The exact dataset source, observation period, target definition, and preprocessing decisions have not yet been supplied.
+The data comes from the [Telco Customer Churn dataset published by blastchar on Kaggle](https://www.kaggle.com/datasets/blastchar/telco-customer-churn). Exploratory analysis is used to investigate the supplied customer data before modeling the churn outcome.
 
-**Documentation to add:** the dataset reference and license, the unit of observation, how churn is defined, the available predictors, and the treatment of missing values. No customer records are reproduced here.
+**Reproducibility details to add:** the exact downloaded version, dataset licensing, the operational definition of the target, selected predictors, and the treatment of missing values. The source link establishes provenance; it does not by itself document the preprocessing used in the analysis.
 
 ## Statistical methods
 
@@ -48,4 +53,4 @@ The editable content can hold exported Quarto figures, plots, tables, and code e
 
 ## Limitations & future work
 
-Without the dataset documentation and validation outputs, this page cannot establish predictive performance or generalizability. The next documentation step is to connect the source repository and Quarto report, then add reproducible evidence and a discussion of the model’s limits.
+The data source and predictive objective are established, but the validation outputs are not yet published here. Predictive performance and generalizability cannot be inferred from the choice of dataset or algorithms. The next documentation step is to connect the source repository and Quarto report, then add reproducible evidence and a discussion of the model’s limits.
