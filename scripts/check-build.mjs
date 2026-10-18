@@ -11,6 +11,12 @@ async function files(directory) {
   return (await Promise.all((await readdir(directory, { withFileTypes: true })).map(entry => entry.isDirectory() ? files(join(directory, entry.name)) : join(directory, entry.name)))).flat();
 }
 const built = await files(root);
+for (const file of built) {
+  const path = relative(root, file).split('\\').join('/');
+  if (path.startsWith('media/') && /\.md$/i.test(path)) {
+    failures.push(`${path}: move this Fieldnotes Markdown entry to src/content/fieldnotes/. Keep only the video and caption files in public/media/. See docs/midia.md.`);
+  }
+}
 const htmlFiles = built.filter(file => file.endsWith('.html'));
 assert.ok(htmlFiles.length >= 2, 'Expected a homepage and a 404 page.');
 const pageUrl = file => new URL(base + relative(root, file).split('\\').join('/').replace(/index\.html$/, ''), site);

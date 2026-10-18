@@ -50,6 +50,8 @@ A foto substitui o monograma ao lado da seção About. **A biografia não é alt
 
 Envie o vídeo para `public/media/`. Uma capa é opcional; para usar uma, envie a imagem para `src/assets/fieldnotes/`.
 
+Crie o Markdown do vídeo em **`src/content/fieldnotes/`**, assim como o de uma foto. Um `.md` enviado para `public/media/` não cria um registro na página: essa pasta serve os arquivos diretamente. A validação da publicação avisa quando um Markdown está nessa pasta por engano.
+
 ```md
 ---
 title: Um registro do processo
