@@ -1,0 +1,15 @@
+---
+import { profile } from '../data/site';
+import { withBase } from '../lib/paths';
+import Arrow from './Arrow.astro';
+---
+<header class="site-header container">
+  <a class="wordmark" href={withBase()} aria-label="Lucas Barros, homepage">Lucas Barros<span aria-hidden="true">.</span></a>
+  <nav aria-label="Main navigation">
+    <a href={withBase('#work')}>Work</a>
+    <a href={withBase('#about')}>About</a>
+    <span class="nav-divider" aria-hidden="true"></span>
+    <a class="social-nav" href={profile.github}>GitHub<Arrow diagonal /></a>
+    {profile.linkedin ? <a class="social-nav" href={profile.linkedin}>LinkedIn<Arrow diagonal /></a> : <span class="nav-pending" title="LinkedIn profile URL has not been provided">LinkedIn<span class="sr-only"> — link not yet provided</span><span class="pending-mark" aria-hidden="true">*</span></span>}
+  </nav>
+</header>

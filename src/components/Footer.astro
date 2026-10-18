@@ -1,0 +1,17 @@
+---
+import { profile } from '../data/site';
+import { withBase } from '../lib/paths';
+import Arrow from './Arrow.astro';
+---
+<footer class="site-footer container">
+  <div class="footer-top">
+    <div><p class="eyebrow">A continuing inquiry</p><p class="footer-heading">Good questions.<br /><em>Thoughtful work.</em></p></div>
+    <div class="footer-contact">
+      <p>Find the work, follow the process.</p>
+      <a class="text-link" href={profile.github}>GitHub<Arrow diagonal /></a>
+      {profile.linkedin && <a class="text-link" href={profile.linkedin}>LinkedIn<Arrow diagonal /></a>}
+      {profile.email ? <a class="text-link" href={`mailto:${profile.email}`}>Get in touch<Arrow diagonal /></a> : <p class="contact-pending">Contact email to be added.</p>}
+    </div>
+  </div>
+  <div class="footer-bottom"><span>© {new Date().getFullYear()} Lucas Barros</span><span>Data science. Considered.</span><a href={withBase('#top')}>Back to top ↑</a></div>
+</footer>

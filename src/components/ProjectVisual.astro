@@ -1,0 +1,40 @@
+---
+interface Props { kind: 'classification' | 'forecast' | 'tableau' | 'none'; large?: boolean; }
+const { kind, large = false } = Astro.props;
+const labels = {
+  classification: 'A schematic decision tree, representing a classification workflow',
+  forecast: 'A schematic time series with a held-out period, representing temporal validation',
+  tableau: 'An empty plotting frame for a future Tableau visualization',
+  none: 'An empty plotting frame; project preview not yet provided',
+};
+---
+<figure class:list={['project-visual', `visual-${kind}`, { 'visual-large': large }]}>
+  <div class="visual-label" aria-hidden="true"><span>{kind === 'classification' ? '01 / Classification' : kind === 'forecast' ? '02 / Time series' : '03 / Visualization'}</span><span>LB</span></div>
+  <svg viewBox="0 0 440 240" fill="none" role="img" aria-label={labels[kind]}>
+    {kind === 'classification' ? <>
+      <path d="M220 58v32H112v40m108-40h108v40M112 154v24H59v28m53-28h53v28m163-52v24h-53v28m53-28h53v28" stroke="currentColor" stroke-width="1" />
+      <rect x="177" y="26" width="86" height="32" fill="var(--color-ink)" />
+      <rect x="76" y="130" width="72" height="25" stroke="currentColor" />
+      <rect x="292" y="130" width="72" height="25" stroke="currentColor" />
+      <text x="220" y="47" fill="var(--color-paper)" text-anchor="middle">churn?</text>
+      <text x="112" y="147" fill="currentColor" text-anchor="middle">split A</text>
+      <text x="328" y="147" fill="currentColor" text-anchor="middle">split B</text>
+      {[59, 165, 275, 381].map((x, i) => <circle cx={x} cy="211" r="5" fill={i === 0 || i === 3 ? 'var(--color-copper)' : 'var(--color-paper)'} stroke={i === 0 || i === 3 ? 'var(--color-copper)' : 'currentColor'} />)}
+      <text x="128" y="110" fill="var(--color-muted)">yes</text><text x="286" y="110" fill="var(--color-muted)">no</text>
+    </> : kind === 'forecast' ? <>
+      <path d="M28 202h386M28 35v167" stroke="currentColor" stroke-opacity=".3" />
+      {[65, 110, 155].map(y => <path d={`M28 ${y}h386`} stroke="currentColor" stroke-opacity=".12" stroke-dasharray="2 4" />)}
+      <path d="M284 35v167" stroke="var(--color-copper)" stroke-dasharray="3 5" />
+      <path d="m28 173 17-9 17 6 17-37 17 14 17-22 17 15 17-48 17 26 17-7 17 16 17-40 17 10 17-24 17 18 18-28" stroke="currentColor" stroke-width="1.5" />
+      <path d="m284 72 20 8 20-22 20 10 20-28 20 12 30-17" stroke="var(--color-copper)" stroke-width="1.5" stroke-dasharray="4 4" />
+      <text x="28" y="226" fill="currentColor">historical window</text><text x="295" y="226" fill="var(--color-accent)">holdout</text>
+    </> : <>
+      <path d="M55 28v170h334M55 70h334M55 113h334M55 156h334M139 28v170M222 28v170M306 28v170M389 28v170" stroke="currentColor" stroke-opacity=".16" />
+      <rect x="115" y="84" width="214" height="51" fill="var(--color-paper)" />
+      <text x="222" y="106" text-anchor="middle" fill="currentColor">{kind === 'tableau' ? 'A view, forthcoming.' : 'Preview forthcoming.'}</text>
+      <text x="222" y="126" text-anchor="middle" fill="var(--color-muted)" font-size="9">{kind === 'tableau' ? 'TABLEAU PUBLIC' : 'PROJECT PREVIEW'}</text>
+      <text x="55" y="226" fill="var(--color-muted)">No data published</text>
+    </>}
+  </svg>
+  <figcaption>{kind === 'classification' || kind === 'forecast' ? 'Method illustration · not an experimental result' : 'Placeholder · visualization not yet provided'}</figcaption>
+</figure>

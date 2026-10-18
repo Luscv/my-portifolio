@@ -1,0 +1,23 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import Arrow from './Arrow.astro';
+import ProjectVisual from './ProjectVisual.astro';
+import { withBase } from '../lib/paths';
+interface Props { project: CollectionEntry<'projects'>; index: number; }
+const { project, index } = Astro.props;
+const { data } = project;
+---
+<article class="project-row">
+  <div class="project-number mono">{String(index + 1).padStart(2, '0')}</div>
+  <div class="project-copy">
+    <p class="eyebrow">{data.discipline}</p>
+    <h3><a href={withBase(`work/${project.id}/`)}>{data.shortTitle || data.title}<Arrow diagonal /></a></h3>
+    <p class="project-summary">{data.abstract}</p>
+    <ul class="tag-list" aria-label="Methods and tools">{data.tags.map(tag => <li>{tag}</li>)}</ul>
+    <p class:list={['project-status', { ongoing: data.status === 'Work in progress' }]}><span aria-hidden="true"></span>{data.status}</p>
+  </div>
+  <a class="project-preview-link" href={withBase(`work/${project.id}/`)} aria-label={`Read ${data.title}`} tabindex="-1" aria-hidden="true">
+    {data.cover ? <Image src={data.cover} alt={data.coverAlt || ''} widths={[400, 720, 1000]} sizes="(max-width: 700px) 100vw, 40vw" loading="lazy" /> : <ProjectVisual kind={data.visual} />}
+  </a>
+</article>

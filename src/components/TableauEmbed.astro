@@ -1,0 +1,48 @@
+---
+import Arrow from './Arrow.astro';
+interface Props { url?: string; title?: string; }
+const { url, title = 'Tableau Public visualization' } = Astro.props;
+const source = url ? new URL(url) : null;
+if (source) { source.searchParams.set(':showVizHome', 'no'); source.searchParams.set(':embed', 'yes'); }
+---
+<section class="tableau-section" aria-label="Interactive visualization">
+  <p class="eyebrow">Interactive view</p>
+  {source ? <>
+    <tableau-view data-src={source.href} data-title={title}>
+      <div class="embed-placeholder">
+        <p class="embed-title">Explore the visualization.</p>
+        <p>The interactive view is hosted by Tableau Public. Loading it connects to an external service.</p>
+        <button class="text-link" type="button" hidden>Load interactive view<Arrow /></button>
+      </div>
+      <p class="embed-status mono" role="status"></p>
+    </tableau-view>
+    <p class="embed-fallback"><a class="text-link" href={url}>Open {title} on Tableau Public<Arrow diagonal /></a></p>
+    <noscript><p>JavaScript is disabled. Use the Tableau Public link above to view the dashboard.</p></noscript>
+  </> : <div class="embed-placeholder"><p class="embed-title">Room for a different view.</p><p>No dashboard has been supplied yet. This editable project supports a Tableau Public visualization and a direct link when one is available.</p><span class="mono">Tableau Public URL · not yet provided</span></div>}
+</section>
+<script>
+  class TableauView extends HTMLElement {
+    connectedCallback() {
+      const button = this.querySelector('button');
+      if (button) button.hidden = false;
+      button?.addEventListener('click', () => {
+        const status = this.querySelector<HTMLElement>('[role="status"]');
+        const src = this.dataset.src;
+        if (!src || !status) return;
+        const frame = document.createElement('iframe');
+        frame.title = this.dataset.title || 'Tableau Public visualization';
+        frame.src = src;
+        frame.loading = 'lazy';
+        frame.allowFullscreen = true;
+        frame.referrerPolicy = 'strict-origin-when-cross-origin';
+        frame.className = 'tableau-frame';
+        frame.setAttribute('tabindex', '0');
+        status.textContent = 'Loading Tableau. If the view is unavailable, use the direct link below.';
+        frame.addEventListener('load', () => { status.textContent = 'View requested. If it does not display, use the direct link below.'; });
+        this.querySelector('.embed-placeholder')?.replaceWith(frame);
+        frame.focus();
+      }, { once: true });
+    }
+  }
+  if (!customElements.get('tableau-view')) customElements.define('tableau-view', TableauView);
+</script>

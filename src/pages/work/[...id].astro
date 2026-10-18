@@ -1,0 +1,42 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import 'katex/dist/katex.min.css';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectVisual from '../../components/ProjectVisual.astro';
+import TableauEmbed from '../../components/TableauEmbed.astro';
+import Arrow from '../../components/Arrow.astro';
+import { withBase } from '../../lib/paths';
+
+export async function getStaticPaths() {
+  const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+  return projects.map((project, index) => ({ params: { id: project.id }, props: { project, next: projects[(index + 1) % projects.length], count: projects.length } }));
+}
+interface Props { project: CollectionEntry<'projects'>; next: CollectionEntry<'projects'>; count: number; }
+const { project, next, count } = Astro.props;
+const { data } = project;
+const { Content, headings } = await render(project);
+const toc = headings.filter(heading => heading.depth === 2);
+---
+<BaseLayout title={data.title} description={data.abstract} article>
+  <article class="case-study container">
+    <header class="case-header">
+      <a class="back-link mono" href={withBase('#work')}>← All work</a>
+      <p class="eyebrow">{data.discipline}{data.year && ` / ${data.year}`}</p>
+      <h1>{data.title}</h1>
+      <p class="case-abstract">{data.abstract}</p>
+      <div class="case-meta"><div><span class="eyebrow">Status</span><p>{data.status}</p></div><div><span class="eyebrow">Methods & tools</span><ul class="tag-list">{data.tags.map(tag => <li>{tag}</li>)}</ul></div></div>
+    </header>
+    <aside class="status-note" aria-label="Project status"><span class="status-dot" aria-hidden="true"></span><p>{data.statusDetail}</p></aside>
+    {data.cover ? <figure class="case-cover"><Image src={data.cover} alt={data.coverAlt || ''} widths={[640, 1120, 1600]} sizes="(max-width: 1120px) 100vw, 1120px" loading="eager" />{data.coverCaption && <figcaption>{data.coverCaption}</figcaption>}</figure> : <ProjectVisual kind={data.visual} large />}
+    <div class="article-grid">
+      <aside class="article-sidebar"><nav aria-label="On this page"><p class="eyebrow">In this study</p><ol>{toc.map(heading => <li><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol></nav></aside>
+      <div class="article-content"><div class="prose"><Content /></div>
+        {(data.visual === 'tableau' || data.tableauUrl) && <TableauEmbed url={data.tableauUrl} title={data.tableauTitle} />}
+        <section class="project-resources" aria-labelledby="resources-title"><p class="eyebrow">Further reading</p><h2 id="resources-title">Source & supporting work</h2>{data.links.length > 0 && <ul>{data.links.map(link => <li><a class="text-link" href={link.url}>{link.label}<Arrow diagonal /></a></li>)}</ul>}{data.pendingLinks.length > 0 && <div class="pending-resources"><p>Links not yet provided</p><ul>{data.pendingLinks.map(label => <li>{label}</li>)}</ul></div>}</section>
+      </div>
+    </div>
+    {count > 1 && <nav class="next-project" aria-label="Next project"><p class="eyebrow">Continue reading</p><a href={withBase(`work/${next.id}/`)}><span>{next.data.title}</span><Arrow /></a></nav>}
+  </article>
+</BaseLayout>

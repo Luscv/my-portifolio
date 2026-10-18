@@ -1,0 +1,27 @@
+---
+const curves = Array.from({ length: 19 }, (_, index) => {
+  const points = Array.from({ length: 121 }, (_, i) => {
+    const x = 24 + i * 2.62;
+    const t = i / 120;
+    const envelope = Math.sin(t * Math.PI) ** 1.4;
+    const wave = Math.sin(t * Math.PI * 2.45 + index * 0.105);
+    const y = 140 + (index - 9) * 4.3 - wave * envelope * (48 + index * 2.1);
+    return `${i ? 'L' : 'M'}${x.toFixed(2)},${y.toFixed(2)}`;
+  });
+  return points.join(' ');
+});
+---
+<figure class="signal-study">
+  <div class="signal-meta"><span>Fig. 01</span><span>Signal / structure</span></div>
+  <svg viewBox="0 0 370 270" fill="none" role="img" aria-labelledby="signal-title">
+    <title id="signal-title">An abstract family of flowing curves converging toward a common structure</title>
+    <path d="M24 230H346M24 30v200" stroke="currentColor" stroke-opacity=".24" />
+    {[65, 120, 175].map(y => <path d={`M24 ${y}H346`} stroke="currentColor" stroke-opacity=".09" stroke-dasharray="2 5" />)}
+    {curves.map((d, i) => <path d={d} stroke={i === 9 ? 'var(--color-ink)' : 'var(--color-copper)'} stroke-width={i === 9 ? 1.6 : .8} opacity={i === 9 ? .9 : .6} />)}
+    <path d="M20 30h8M20 130h8M20 230h8M24 226v8M185 226v8M346 226v8" stroke="currentColor" stroke-opacity=".4" />
+    <circle cx="185" cy="130" r="3" fill="var(--color-paper)" stroke="var(--color-ink)" />
+    <path d="M185 123v-24m0 0 6 6m-6-6-6 6" stroke="var(--color-ink)" stroke-width=".8" />
+    <text x="176" y="86" fill="currentColor" font-size="10" font-family="var(--font-mono)">f(x)</text>
+  </svg>
+  <figcaption>Illustrative study · not project data</figcaption>
+</figure>
