@@ -15,6 +15,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
     env:
       # Optional repository variables. Empty values use the default GitHub Pages URL.
       SITE_URL: ${{ vars.SITE_URL }}
@@ -22,6 +25,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v7
+      - name: Check that GitHub Pages is enabled
+        uses: actions/configure-pages@v6
       - name: Build, validate, and upload the static site
         uses: withastro/action@v6
         with:

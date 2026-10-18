@@ -139,11 +139,19 @@ Dashboard layout responsiveness is controlled in Tableau too: publish device lay
 
 ## GitHub Pages
 
-The workflow uses the official `withastro/action@v6` to install, validate, build, and upload, followed by `actions/deploy-pages@v5`. It runs on pushes to **main** and through **Run workflow**. The included lockfile supports repeatable npm installs; commit it along with the code. Deployment permissions are scoped to the deploy job.
+The workflow checks Pages availability with `actions/configure-pages@v6`, then uses the official `withastro/action@v6` to install, validate, build, and upload, followed by `actions/deploy-pages@v5`. It runs on pushes to **main** and through **Run workflow**. The included lockfile supports repeatable npm installs; commit it along with the code. The build job can read Pages settings; deployment write permissions are scoped to the deploy job.
 
 1. Commit and push the project to `main` in your GitHub repository.
 2. In **Settings → Pages → Build and deployment**, select **GitHub Actions** as the source.
 3. In **Actions**, inspect **Deploy portfolio to GitHub Pages** and its deployment result.
+
+### Publication troubleshooting
+
+- **Deployment returns 404 / “Ensure GitHub Pages has been enabled”:** open **Settings → Pages** and select **GitHub Actions** under **Build and deployment → Source**. Pages must be enabled before the workflow can publish its artifact.
+- **A workflow named “pages build and deployment” runs Jekyll:** Pages is using **Deploy from a branch**. Change the source to **GitHub Actions**. This repository contains Astro source; the website to publish is the `dist/` artifact produced by the Astro workflow.
+- After changing the source, open **Actions → Deploy portfolio to GitHub Pages**, select the latest run, and choose **Re-run all jobs**, or use **Run workflow** on `main`. Do not rerun the Jekyll workflow.
+
+The Pages configuration check fails early if the site has not been enabled. It reads the repository settings without requiring a personal access token or changing administrator settings.
 
 The build reads `GITHUB_REPOSITORY` automatically on GitHub Actions:
 
