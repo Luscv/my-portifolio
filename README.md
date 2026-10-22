@@ -74,9 +74,9 @@ Required frontmatter:
 title: A verified project title
 abstract: A concise, factual overview.
 discipline: Statistical modeling
-order: 4
+order: 5
 status: Work in progress
-statusDetail: Clearly state what is complete and what remains under development.
+statusDetail: Summarize the project's purpose and methodological scope.
 tags: [Python, Forecasting]
 ```
 
@@ -87,7 +87,7 @@ Optional fields:
 | `shortTitle` | Shorter title in the homepage listing |
 | `featured` | Defaults to `true`; `false` excludes only the homepage listing |
 | `year` | A verified year or period, as a quoted string |
-| `visual` | `classification`, `forecast`, `tableau`, `relational`, or `none` (default) |
+| `visual` | `credit`, `classification`, `forecast`, `tableau`, `relational`, or `none` (default) |
 | `cover`, `coverAlt`, `coverCaption` | Local cover image, meaningful alt text, and optional caption |
 | `links` | List of `{ label, url }` objects using verified HTTPS URLs |
 | `pendingLinks` | Names of resources not yet provided; rendered as text, never broken links |
@@ -97,7 +97,7 @@ Optional fields:
 | `tableau` | Set `true` to show the Tableau publication status before a public URL is available |
 | `tableauUrl`, `tableauTitle` | Real Tableau Public view URL and accessible title |
 
-Allowed statuses are `Documented project`, `Work in progress`, and `Editable template`. Markdown `##` headings automatically generate the case-study table of contents. They should cover context, data, methods, validation, results, and limitations.
+Allowed statuses are `Documented project`, `Work in progress`, and `Editable template`. Markdown `##` headings automatically generate the case-study table of contents. Cover context, data, methods, validation, and limitations. Include results when supported by publishable evidence; a methodological study can use a single project-level `Work in progress` status without tracking each stage separately.
 
 ### Images and plots
 

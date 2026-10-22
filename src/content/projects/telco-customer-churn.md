@@ -2,7 +2,7 @@
 title: Telco Customer Churn
 abstract: Predictive analysis of the Telco Customer Churn dataset from Kaggle, using exploratory analysis, logistic regression, and decision trees in R and Quarto.
 discipline: Statistical modeling
-order: 1
+order: 3
 status: Documented project
 statusDetail: The Kaggle data source, predictive objective, and modeling approach are documented. Experiment details and measured model performance will be added with their supporting analysis.
 tags: [R, Quarto, Logistic regression, Decision trees]

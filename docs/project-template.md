@@ -2,9 +2,9 @@
 title: Replace with the verified project title
 abstract: Replace with a short, factual description of the problem and confirmed work.
 discipline: Replace with the discipline
-order: 4
+order: 5
 status: Work in progress
-statusDetail: Describe exactly what is complete, what is ongoing, and what evidence is available.
+statusDetail: Summarize the project's purpose and methodological scope.
 featured: true
 tags: [Replace with confirmed tools]
 visual: none

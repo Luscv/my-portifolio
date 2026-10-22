@@ -1,6 +1,6 @@
 ---
 title: Demand Forecasting & Inventory Replenishment
-shortTitle: Demand Forecasting & Inventory Replenishment
+shortTitle: Import Planning & Demand Forecasting
 abstract: From SQL Server replenishment heuristics across 300+ product profiles to an ongoing Python forecasting approach, grounded in historical reconstruction and temporal backtesting.
 discipline: Forecasting & operations
 order: 2

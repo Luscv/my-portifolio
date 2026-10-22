@@ -2,7 +2,7 @@
 title: Belo Horizonte Traffic Accidents
 abstract: Exploring how traffic reports vary across time and place through a relational Tableau workbook connecting incidents, people, vehicles, streets, and geographic coordinates.
 discipline: Visual analytics & urban data
-order: 3
+order: 4
 status: Documented project
 statusDetail: Three Tableau worksheets are available in the downloadable workbook. The interactive Tableau Public version is not published yet; refreshing the workbook requires its external Excel data source.
 tags: [Tableau, Relational modeling, Temporal analysis, Mapping]

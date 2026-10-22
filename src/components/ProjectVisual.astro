@@ -1,18 +1,40 @@
 ---
-interface Props { kind: 'classification' | 'forecast' | 'tableau' | 'relational' | 'none'; large?: boolean; }
+interface Props { kind: 'credit' | 'classification' | 'forecast' | 'tableau' | 'relational' | 'none'; large?: boolean; }
 const { kind, large = false } = Astro.props;
 const labels = {
+  credit: 'Application data and credit histories become financial features, compared through logistic regression and LightGBM to estimate repayment risk',
   classification: 'A schematic decision tree, representing a classification workflow',
   forecast: 'A schematic time series with a held-out period, representing temporal validation',
   tableau: 'An empty plotting frame for a future Tableau visualization',
   relational: 'Report records linked by their identifier to people, vehicles, streets, and coordinates',
   none: 'An empty plotting frame; project preview not yet provided',
 };
+const visualTitles = {
+  credit: 'Credit risk',
+  classification: 'Classification',
+  forecast: 'Time series',
+  tableau: 'Visualization',
+  relational: 'Relational model',
+  none: 'Visual study',
+};
 ---
 <figure class:list={['project-visual', `visual-${kind}`, { 'visual-large': large }]}>
-  <div class="visual-label" aria-hidden="true"><span>{kind === 'classification' ? '01 / Classification' : kind === 'forecast' ? '02 / Time series' : kind === 'relational' ? '03 / Relational model' : '03 / Visualization'}</span><span>LB</span></div>
+  <div class="visual-label" aria-hidden="true"><span>{visualTitles[kind]}</span><span>LB</span></div>
   <svg viewBox="0 0 440 240" fill="none" role="img" aria-label={labels[kind]}>
-    {kind === 'classification' ? <>
+    {kind === 'credit' ? <>
+      <path d="M84 62v16h272V62M220 62v31M220 123v16H119v16m101-16h101v16M119 185v17h202v-17M220 202v14" stroke="var(--color-copper)" stroke-width="1.2" />
+      {[[84, 'application'], [220, 'bureau'], [356, 'previous_app']].map(([x, label]) => <>
+        <rect x={Number(x) - 55} y="32" width="110" height="30" fill="var(--color-surface)" stroke="var(--color-border)" />
+        <text x={x} y="51" text-anchor="middle" fill="currentColor">{label}</text>
+      </>)}
+      <rect x="136" y="93" width="168" height="30" fill="var(--color-ink)" />
+      <text x="220" y="112" text-anchor="middle" fill="var(--color-paper)">financial features</text>
+      {[[119, 'Logistic regression'], [321, 'LightGBM']].map(([x, label]) => <>
+        <rect x={Number(x) - 75} y="155" width="150" height="30" fill="var(--color-surface)" stroke="var(--color-border)" />
+        <text x={x} y="174" text-anchor="middle" fill="currentColor">{label}</text>
+      </>)}
+      <text x="220" y="232" text-anchor="middle" fill="var(--color-accent)">repayment-risk estimates</text>
+    </> : kind === 'classification' ? <>
       <path d="M220 58v32H112v40m108-40h108v40M112 154v24H59v28m53-28h53v28m163-52v24h-53v28m53-28h53v28" stroke="currentColor" stroke-width="1" />
       <rect x="177" y="26" width="86" height="32" fill="var(--color-ink)" />
       <rect x="76" y="130" width="72" height="25" stroke="currentColor" />
@@ -45,5 +67,5 @@ const labels = {
       <text x="55" y="226" fill="var(--color-muted)">No data published</text>
     </>}
   </svg>
-  <figcaption>{kind === 'relational' ? 'Model diagram · based on workbook relationships' : kind === 'classification' || kind === 'forecast' ? 'Method illustration · not an experimental result' : 'Placeholder · visualization not yet provided'}</figcaption>
+  <figcaption>{kind === 'credit' ? 'Method schematic · from applications to risk estimates' : kind === 'relational' ? 'Model diagram · based on workbook relationships' : kind === 'classification' || kind === 'forecast' ? 'Method illustration · not an experimental result' : 'Placeholder · visualization not yet provided'}</figcaption>
 </figure>
