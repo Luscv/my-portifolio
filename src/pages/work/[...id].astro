@@ -31,7 +31,7 @@ const toc = headings.filter(heading => heading.depth === 2);
     <aside class="status-note" aria-label="Project status"><span class="status-dot" aria-hidden="true"></span><p>{data.statusDetail}</p></aside>
     {data.cover ? <figure class="case-cover"><Image src={data.cover} alt={data.coverAlt || ''} widths={[640, 1120, 1600]} sizes="(max-width: 1120px) 100vw, 1120px" loading="eager" />{data.coverCaption && <figcaption>{data.coverCaption}</figcaption>}</figure> : <ProjectVisual kind={data.visual} large />}
     <div class="article-grid">
-      <aside class="article-sidebar"><nav aria-label="On this page"><p class="eyebrow">In this study</p><ol>{toc.map(heading => <li><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol></nav></aside>
+      <aside class="article-sidebar"><nav aria-label="On this page"><p class="eyebrow">In this project</p><ol>{toc.map(heading => <li><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol></nav></aside>
       <div class="article-content"><div class="prose"><Content /></div>
         {data.figures.length > 0 && <section class="workbook-gallery" aria-labelledby="figures-title"><p class="eyebrow">Visual record</p><h2 id="figures-title">{data.galleryTitle}</h2><div class="workbook-figures">{data.figures.map(figure => <figure><Image src={figure.image} alt={figure.alt} format="png" loading="lazy" /><figcaption><h3>{figure.title}</h3><p>{figure.caption}</p></figcaption></figure>)}</div>{data.galleryNote && <p class="gallery-note">{data.galleryNote}</p>}</section>}
         {(data.tableau || data.visual === 'tableau' || data.tableauUrl) && <TableauEmbed url={data.tableauUrl} title={data.tableauTitle} />}

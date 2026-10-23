@@ -76,7 +76,7 @@ abstract: A concise, factual overview.
 discipline: Statistical modeling
 order: 5
 status: Work in progress
-statusDetail: Summarize the project's purpose and methodological scope.
+statusDetail: Summarize the project's objective, solution, and technical approach.
 tags: [Python, Forecasting]
 ```
 
@@ -97,7 +97,7 @@ Optional fields:
 | `tableau` | Set `true` to show the Tableau publication status before a public URL is available |
 | `tableauUrl`, `tableauTitle` | Real Tableau Public view URL and accessible title |
 
-Allowed statuses are `Documented project`, `Work in progress`, and `Editable template`. Markdown `##` headings automatically generate the case-study table of contents. Cover context, data, methods, validation, and limitations. Include results when supported by publishable evidence; a methodological study can use a single project-level `Work in progress` status without tracking each stage separately.
+Allowed statuses are `Documented project`, `Work in progress`, and `Editable template`. Markdown `##` headings automatically generate the project table of contents. Present each entry as an applied project: its problem, objective, solution, technical decisions, validation, and constraints. Include results when supported by publishable evidence; an ongoing project can use a single `Work in progress` status without tracking each stage separately. Avoid framing projects as coursework or learning activities.
 
 ### Images and plots
 

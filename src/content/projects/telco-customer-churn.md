@@ -19,7 +19,7 @@ The objective is to develop a **predictive analysis of customer churn** using th
 
 The project combines exploratory analysis with two modeling families, logistic regression and decision trees, to investigate that predictive task.
 
-The work is implemented in **R** and documented with **Quarto**. This case study records the confirmed scope; it does not claim a particular model outperformed another or attach an unsupported business outcome to the analysis.
+The project is implemented in **R** and documented with **Quarto**, combining exploratory analysis with interpretable classification models for customer churn prediction.
 
 ## Data & approach
 

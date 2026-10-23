@@ -4,7 +4,7 @@ abstract: Replace with a short, factual description of the problem and confirmed
 discipline: Replace with the discipline
 order: 5
 status: Work in progress
-statusDetail: Summarize the project's purpose and methodological scope.
+statusDetail: Summarize the project's objective, solution, and technical approach.
 featured: true
 tags: [Replace with confirmed tools]
 visual: none

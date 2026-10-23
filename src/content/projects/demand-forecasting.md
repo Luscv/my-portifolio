@@ -56,4 +56,4 @@ Completed heuristic work and ongoing forecasting experiments will remain separat
 
 The forecasting approach remains exploratory. The immediate work is to develop historical reconstruction and temporal backtesting, then document model comparisons and their limits.
 
-Any future public examples must use publishable or clearly labeled synthetic data. Confidential business information and unsupported impact claims do not belong in this case study.
+Any future public examples must use publishable or clearly labeled synthetic data. Public project documentation excludes confidential business information and unsupported impact claims.
