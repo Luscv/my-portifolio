@@ -74,7 +74,7 @@ Required frontmatter:
 title: A verified project title
 abstract: A concise, factual overview.
 discipline: Statistical modeling
-order: 5
+order: 7
 status: Work in progress
 statusDetail: Summarize the project's objective, solution, and technical approach.
 tags: [Python, Forecasting]
@@ -87,17 +87,20 @@ Optional fields:
 | `shortTitle` | Shorter title in the homepage listing |
 | `featured` | Defaults to `true`; `false` excludes only the homepage listing |
 | `year` | A verified year or period, as a quoted string |
-| `visual` | `credit`, `classification`, `forecast`, `tableau`, `relational`, or `none` (default) |
+| `visual` | `credit`, `lending`, `stroke`, `classification`, `forecast`, `tableau`, `relational`, or `none` (default) |
 | `cover`, `coverAlt`, `coverCaption` | Local cover image, meaningful alt text, and optional caption |
 | `links` | List of `{ label, url }` objects using verified HTTPS URLs |
 | `pendingLinks` | Names of resources not yet provided; rendered as text, never broken links |
 | `downloads` | List of `{ label, file }` objects for actual files under `public/projects/`; use `/projects/...` paths |
 | `figures` | Array of `{ image, alt, title, caption }` items; local images use paths relative to the content file |
 | `galleryTitle`, `galleryNote` | Heading and source/quality note for the figure gallery |
+| `galleryLayout` | `thumbnails` (default) or `full` for readable, stacked analytical plots |
 | `tableau` | Set `true` to show the Tableau publication status before a public URL is available |
 | `tableauUrl`, `tableauTitle` | Real Tableau Public view URL and accessible title |
 
-Allowed statuses are `Documented project`, `Work in progress`, and `Editable template`. Markdown `##` headings automatically generate the project table of contents. Present each entry as an applied project: its problem, objective, solution, technical decisions, validation, and constraints. Include results when supported by publishable evidence; an ongoing project can use a single `Work in progress` status without tracking each stage separately. Avoid framing projects as coursework or learning activities.
+Allowed statuses are `Completed project`, `Documented project`, `Work in progress`, and `Editable template`. Markdown `##` headings automatically generate the project table of contents. Present each entry as an applied project: its problem, objective, solution, technical decisions, validation, and constraints. Include results when supported by publishable evidence; an ongoing project can use a single `Work in progress` status without tracking each stage separately. Avoid framing projects as coursework or learning activities.
+
+LendingClub and Home Credit are separate projects. Metric sources and reviewed commits for LendingClub and Stroke Prediction are recorded in [docs/project-evidence.md](docs/project-evidence.md). Stroke’s AUC is explicitly in-sample; preserve that evaluation context when updating the copy.
 
 ### Images and plots
 
@@ -206,4 +209,4 @@ The diagrams are original SVG method illustrations, explicitly labeled as illust
 
 `npm run validate` checks deployment settings, builds every page, checks local links and fragments, verifies generated assets and image dimensions, and checks metadata and the sitemap. Before publishing changes, also inspect mobile/desktop rendering and keyboard navigation in a browser. External sites and Tableau availability require their own checks; the static build cannot establish their uptime.
 
-Still to supply: personal photos and films, the Telco source repository/Quarto report and measured results, and the published Tableau Public view. The PBH case study includes the original TWB and its three embedded thumbnails; the Excel data and a packaged TWBX were not among the supplied files. Its source documentation identifies a prepared dataset derived from PBH data; reference-report findings are attributed separately from the workbook’s verified structure. Supporting third-party PDFs are not presented as Lucas’s own authored report.
+Still to supply: the Telco source repository/Quarto report and measured results, and the published Tableau Public view. The PBH case study includes the original TWB and its three embedded thumbnails; the Excel data and a packaged TWBX were not among the supplied files. Its source documentation identifies a prepared dataset derived from PBH data; reference-report findings are attributed separately from the workbook’s verified structure. Supporting third-party PDFs are not presented as Lucas’s own authored report.

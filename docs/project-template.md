@@ -2,7 +2,7 @@
 title: Replace with the verified project title
 abstract: Replace with a short, factual description of the problem and confirmed work.
 discipline: Replace with the discipline
-order: 5
+order: 7
 status: Work in progress
 statusDetail: Summarize the project's objective, solution, and technical approach.
 featured: true
