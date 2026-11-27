@@ -1,6 +1,5 @@
 ---
-title: "D-RAG: Hybrid Search over Tabular Data"
-shortTitle: D-RAG
+title: Hybrid Search RAG
 abstract: A question-answering system for CSV data that combines exact-match and semantic retrieval, computes business metrics with pandas, and cites its sources.
 discipline: Applied AI & Information Retrieval
 order: 7
@@ -15,7 +14,7 @@ links:
 
 ## Context & problem
 
-A question about tabular data can ask for a single fact, such as an employee's supervisor, or a calculation across the entire dataset, such as comparing sales across years. The first needs the right records. The second needs a calculation, not an answer inferred from a handful of retrieved rows. D-RAG separates those two paths and checks whether the data can support the question before generating an answer.
+A question about tabular data can ask for a single fact, such as an employee's supervisor, or a calculation across the entire dataset, such as comparing sales across years. The first needs the right records. The second needs a calculation, not an answer inferred from a handful of retrieved rows. The system separates those two paths and checks whether the data can support the question before generating an answer.
 
 ## Data & retrieval
 
