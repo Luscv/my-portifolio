@@ -1,4 +1,5 @@
 ---
+import { compareProjects } from '../../lib/projects';
 import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
@@ -10,7 +11,7 @@ import Arrow from '../../components/Arrow.astro';
 import { withBase } from '../../lib/paths';
 
 export async function getStaticPaths() {
-  const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+  const projects = (await getCollection('projects')).sort(compareProjects);
   return projects.map((project, index) => ({ params: { id: project.id }, props: { project, next: projects[(index + 1) % projects.length], count: projects.length } }));
 }
 interface Props { project: CollectionEntry<'projects'>; next: CollectionEntry<'projects'>; count: number; }

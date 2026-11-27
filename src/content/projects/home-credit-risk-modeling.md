@@ -3,7 +3,7 @@ title: Home Credit — Credit Risk Modeling
 shortTitle: Home Credit Risk Modeling
 abstract: A credit-risk modeling project that combines application data, financial ratios, and credit history to estimate repayment difficulty, using logistic regression and LightGBM within a consistent validation framework.
 discipline: Credit risk & statistical learning
-order: 1
+order: 3
 status: Work in progress
 statusDetail: Credit-risk modeling pipeline covering data preparation, financial feature engineering, credit-history integration, model training, and probability-based evaluation.
 tags: [Python, pandas, scikit-learn, Logistic regression, LightGBM]

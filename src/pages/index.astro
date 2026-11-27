@@ -1,4 +1,5 @@
 ---
+import { compareProjects } from '../lib/projects';
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectRow from '../components/ProjectRow.astro';
@@ -8,7 +9,7 @@ import Asterisk from '../components/Asterisk.astro';
 import FieldnotesSection from '../components/FieldnotesSection.astro';
 import ProfilePortrait from '../components/ProfilePortrait.astro';
 import { profile } from '../data/site';
-const projects = (await getCollection('projects', ({ data }) => data.featured)).sort((a, b) => a.data.order - b.data.order);
+const projects = (await getCollection('projects', ({ data }) => data.featured)).sort(compareProjects);
 ---
 <BaseLayout>
   <section class="hero container" aria-labelledby="hero-title">

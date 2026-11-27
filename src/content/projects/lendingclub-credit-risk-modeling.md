@@ -3,7 +3,7 @@ title: LendingClub — Credit Risk Modeling
 shortTitle: LendingClub Credit Risk Modeling
 abstract: Credit-risk data preparation across 466,285 LendingClub loans, transforming employment tenure, loan terms, and credit dates into consistent numerical features.
 discipline: Credit risk & data preparation
-order: 2
+order: 1
 status: Work in progress
 statusDetail: A credit-risk modeling project built around reproducible preparation of LendingClub loan records and explicit handling of financial time variables.
 tags: [Python, pandas, NumPy, Feature engineering]

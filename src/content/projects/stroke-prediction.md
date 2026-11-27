@@ -3,7 +3,7 @@ title: Stroke Prediction — Interpretable Logistic Modeling
 shortTitle: Stroke Prediction
 abstract: A completed logistic-regression project connecting clinical and demographic variables to recorded stroke occurrence, with model reduction, odds-ratio interpretation, and in-sample ROC-AUCs of 0.83 for the full model and 0.82 for the reduced model.
 discipline: Statistical modeling & health data
-order: 3
+order: 5
 status: Completed project
 statusDetail: Completed project covering data preparation, full and reduced logistic models, diagnostic checks, ROC analysis, and interpretation of adjusted odds ratios.
 tags: [Python, statsmodels, Logistic regression, Model diagnostics]

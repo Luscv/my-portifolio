@@ -21,7 +21,7 @@ const projects = defineCollection({
     featured: z.boolean().default(true),
     tags: z.array(z.string()),
     year: z.string().optional(),
-    visual: z.enum(['credit', 'lending', 'stroke', 'classification', 'forecast', 'tableau', 'relational', 'none']).default('none'),
+    visual: z.enum(['credit', 'lending', 'stroke', 'classification', 'forecast', 'tableau', 'relational', 'rag', 'none']).default('none'),
     cover: image().optional(),
     coverAlt: z.string().optional(),
     coverCaption: z.string().optional(),
